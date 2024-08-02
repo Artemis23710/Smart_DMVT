@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RolemanageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,5 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/rolelists', [RolemanageController::class, 'index'])->name('rolelists');
+Route::post('/insertrole', [RolemanageController::class, 'storeRole'])->name('insertrole');
+Route::delete('/roledelete/{role}', [RolemanageController::class, 'destroy'])->name('roledelete');
 
 require __DIR__.'/auth.php';

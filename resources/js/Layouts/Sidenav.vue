@@ -1,53 +1,83 @@
 <template>
     <nav class="custom-navbar">
-      <div class="container">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a class="nav-link" :href="route('dashboard')"><i class="material-icons">grid_view</i> Dashboard</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#"><i class="material-icons">widgets</i> Modules</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <div class="container">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <Link class="nav-link" :href="route('dashboard')"><i class="material-icons">grid_view</i> Dashboard
+                    </Link>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#"><i class="material-icons">widgets</i> Modules</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <Link class="dropdown-item" href="#">Action</Link>
+                        </li>
+                        <li>
+                            <Link class="dropdown-item" href="#">Another action</Link>
+                        </li>
+                        <li>
+                            <Link class="dropdown-item" href="#">Something else here</Link>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <Link class="nav-link" href="#"><i class="material-icons">view_module</i> Component</Link>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#"><i class="material-icons">build</i> Features</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <Link class="dropdown-item" href="#">Action</Link>
+                        </li>
+                        <li>
+                            <Link class="dropdown-item" href="#">Another action</Link>
+                        </li>
+                        <li>
+                            <Link class="dropdown-item" href="#">Something else here</Link>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#"><i class="material-icons">apps</i> Applications</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <Link class="dropdown-item" href="#">Action</Link>
+                        </li>
+                        <li>
+                            <Link class="dropdown-item" href="#">Another action</Link>
+                        </li>
+                        <li>
+                            <Link class="dropdown-item" href="#">Something else here</Link>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#"><i class="material-icons">admin_panel_settings</i> Administrator</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <Link class="dropdown-item" :href="route('rolelists')">Roles</Link>
+                        </li>
+                        <li>
+                            <Link class="dropdown-item" href="#">Users</Link>
+                        </li>
+                        <li>
+                            <Link class="dropdown-item" href="#">Privileges</Link>
+                        </li>
+                    </ul>
+                </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="material-icons">view_module</i> Component</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#"><i class="material-icons">build</i> Features</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#"><i class="material-icons">apps</i> Applications</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#"><i class="material-icons">admin_panel_settings</i> Administrator</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+        </div>
     </nav>
-  </template>
+</template>
 
 <script>
+import { Link } from '@inertiajs/vue3';
+
 export default {
     name: 'Sidenav',
+    components: {
+    Link
+  },
 };
 </script>
 
