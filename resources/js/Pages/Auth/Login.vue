@@ -1,5 +1,4 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -28,18 +27,12 @@ const submit = () => {
 };
 </script>
 <style>
-        .login-clean {
-            
-            padding: 80px;
-            width: 100%;
-            height: 100%;
-        }
 
-        .login-clean form {
+        .loginform {
             max-width: 320px;
             width: 100%;
             height: 100%;
-            margin: 0 auto;
+          
             background-color: #ffffff;
             padding: 40px;
             border-radius: 4px;
@@ -47,14 +40,7 @@ const submit = () => {
             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .login-clean .illustration {
-            text-align: center;
-            padding: 0 0 20px;
-            font-size: 100px;
-            color: rgb(244, 71, 107);
-        }
-
-        .login-clean form .form-control {
+        .loginform .form-control {
             background: #f7f9fc;
             border: none;
             border-bottom: 1px solid #dfe7f1;
@@ -66,7 +52,7 @@ const submit = () => {
             height: 42px;
         }
 
-        .login-clean form .btn-primary {
+        .loginform .btn-primary {
             background: #f4476b;
             border: none;
             border-radius: 4px;
@@ -77,16 +63,16 @@ const submit = () => {
             outline: none !important;
         }
 
-        .login-clean form .btn-primary:hover,
-        .login-clean form .btn-primary:active {
+        .loginform.btn-primary:hover,
+        .loginform .btn-primary:active {
             background: #eb3b60;
         }
 
-        .login-clean form .btn-primary:active {
+        .loginform .btn-primary:active {
             transform: translateY(1px);
         }
 
-        .login-clean form .forgot {
+        .loginform .forgot {
             display: block;
             text-align: center;
             font-size: 12px;
@@ -95,8 +81,8 @@ const submit = () => {
             text-decoration: none;
         }
 
-        .login-clean form .forgot:hover,
-        .login-clean form .forgot:active {
+        .loginform .forgot:hover,
+        .loginform .forgot:active {
             opacity: 1;
             text-decoration: none;
         }
@@ -105,10 +91,10 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <div class="login-clean">
-            <form @submit.prevent="submit">
+       
+            <form @submit.prevent="submit" class="loginform">
                 
-                <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
+                 <img src="../../../../public/Images/logo2.png" style="width: 800px; height:180px;"/>
 
                 <div class="form-group" >
                     <input class="form-control" type="email" v-model="form.email" placeholder="Email">
@@ -126,7 +112,7 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
-        </div>
+    
        
     </GuestLayout>
 </template>

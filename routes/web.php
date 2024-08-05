@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolemanageController;
+use App\Http\Controllers\UsermanageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,4 +41,7 @@ Route::get('/rolelists', [RolemanageController::class, 'index'])->name('rolelist
 Route::post('/insertrole', [RolemanageController::class, 'storeRole'])->name('insertrole');
 Route::delete('/roledelete/{role}', [RolemanageController::class, 'destroy'])->name('roledelete');
 
+Route::get('/userlists', [UsermanageController::class, 'index'])->name('userlists');
+Route::post('/storeuser', [UsermanageController::class, 'store'])->name('storeuser');
+Route::get('/userstatus/{id}/{status}', [UsermanageController::class, 'status'])->name('userstatus');
 require __DIR__.'/auth.php';
