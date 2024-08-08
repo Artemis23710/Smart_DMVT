@@ -61,7 +61,7 @@
                             <Link class="dropdown-item" :href="route('userlists')">Users</Link>
                         </li>
                         <li>
-                            <Link class="dropdown-item" href="#">Privileges</Link>
+                            <Link class="dropdown-item" :href="route('permisionlist')">Privileges</Link>
                         </li>
                     </ul>
                 </li>

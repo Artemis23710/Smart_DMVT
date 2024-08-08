@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admincontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolemanageController;
 use App\Http\Controllers\UsermanageController;
@@ -44,4 +45,9 @@ Route::delete('/roledelete/{role}', [RolemanageController::class, 'destroy'])->n
 Route::get('/userlists', [UsermanageController::class, 'index'])->name('userlists');
 Route::post('/storeuser', [UsermanageController::class, 'store'])->name('storeuser');
 Route::get('/userstatus/{id}/{status}', [UsermanageController::class, 'status'])->name('userstatus');
+
+Route::get('/permisionlist', [Admincontroller::class, 'index'])->name('permisionlist');
+Route::get('/addpermision/{id}', [Admincontroller::class, 'addprivilegesview'])->name('addpermision');
+Route::post('/saveprivilegies', [Admincontroller::class, 'updateprivilegies'])->name('saveprivilegies');
+
 require __DIR__.'/auth.php';
