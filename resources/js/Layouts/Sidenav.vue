@@ -6,37 +6,38 @@
                     <Link class="nav-link" :href="route('dashboard')"><i class="material-icons">grid_view</i> Dashboard
                     </Link>
                 </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#"><i class="material-icons">widgets</i> Modules</a>
+                    <a class="nav-link" href="#"><i class="material-icons">widgets</i>Driving License</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <Link class="dropdown-item" href="#">Action</Link>
+                            <Link class="dropdown-item" href="#">Driving License Issue </Link>
                         </li>
                         <li>
-                            <Link class="dropdown-item" href="#">Another action</Link>
+                            <Link class="dropdown-item" href="#">Driving License Print</Link>
                         </li>
                         <li>
-                            <Link class="dropdown-item" href="#">Something else here</Link>
+                            <Link class="dropdown-item" href="#">Driving License Renew</Link>
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#"><i class="material-icons">build</i>Vehicle Registration</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <Link class="dropdown-item" href="#">New Vehicle Registration</Link>
+                        </li>
+                        <li>
+                            <Link class="dropdown-item" href="#">Vehicle Registration Renew</Link>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-item">
                     <Link class="nav-link" href="#"><i class="material-icons">view_module</i> Component</Link>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#"><i class="material-icons">build</i> Features</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <Link class="dropdown-item" href="#">Action</Link>
-                        </li>
-                        <li>
-                            <Link class="dropdown-item" href="#">Another action</Link>
-                        </li>
-                        <li>
-                            <Link class="dropdown-item" href="#">Something else here</Link>
-                        </li>
-                    </ul>
-                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#"><i class="material-icons">apps</i> Applications</a>
                     <ul class="dropdown-menu">
