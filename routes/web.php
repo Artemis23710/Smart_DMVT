@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admincontroller;
+use App\Http\Controllers\DrivinglicenseController;
+use App\Http\Controllers\DrivinglicenseprintController;
+use App\Http\Controllers\DrivinglicenserenewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolemanageController;
 use App\Http\Controllers\UsermanageController;
@@ -49,5 +52,16 @@ Route::get('/userstatus/{id}/{status}', [UsermanageController::class, 'status'])
 Route::get('/permisionlist', [Admincontroller::class, 'index'])->name('permisionlist');
 Route::get('/addpermision/{id}', [Admincontroller::class, 'addprivilegesview'])->name('addpermision');
 Route::post('/saveprivilegies', [Admincontroller::class, 'updateprivilegies'])->name('saveprivilegies');
+
+
+
+Route::get('/drivinglisencelist', [DrivinglicenseController::class, 'index'])->name('drivinglisencelist');
+Route::get('/drivinglisencenew', [DrivinglicenseController::class, 'newlicense'])->name('drivinglisencenew');
+
+
+
+Route::get('/drivinglisenceprint', [DrivinglicenseprintController::class, 'index'])->name('drivinglisenceprint');
+
+Route::get('/drivinglisencerenew', [DrivinglicenserenewController::class, 'index'])->name('drivinglisencerenew');
 
 require __DIR__.'/auth.php';

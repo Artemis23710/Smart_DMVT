@@ -11,13 +11,13 @@
                     <a class="nav-link" href="#"><i class="material-icons">widgets</i>Driving License</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <Link class="dropdown-item" href="#">Driving License Issue </Link>
+                            <Link class="dropdown-item" :href="route('drivinglisencelist')">Driving License Issue </Link>
                         </li>
                         <li>
-                            <Link class="dropdown-item" href="#">Driving License Print</Link>
+                            <Link class="dropdown-item" :href="route('drivinglisenceprint')">Driving License Print</Link>
                         </li>
                         <li>
-                            <Link class="dropdown-item" href="#">Driving License Renew</Link>
+                            <Link class="dropdown-item" :href="route('drivinglisencerenew')">Driving License Renew</Link>
                         </li>
                     </ul>
                 </li>
