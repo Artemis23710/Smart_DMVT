@@ -41,7 +41,7 @@ import axios from 'axios';
                                         </div>
                                         <div class="col-4">
                                             <label class="inputlabel">4b.Date of the Expiry</label>
-                                            <TextInput type="text" v-model="licensedetails.doe" class="mt-1 block w-full" aria-required="true" />
+                                            <TextInput type="date" v-model="licensedetails.doe" class="mt-1 block w-full" aria-required="true" />
                                         </div>
                                         <div class="col-4">
                                             <label class="inputlabel">4b.NIC</label>
@@ -98,6 +98,7 @@ import axios from 'axios';
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex align-items-center justify-content-center">
+                                        <input type="hidden" v-model="licensedetails.hiddenid"/>
                                         <PrimaryButton type="submit">
                                             <i class="fas fa-save"></i>&nbsp; Save
                                         </PrimaryButton>
@@ -117,7 +118,7 @@ export default {
     data() {
         return {
             licensedetails:{
-                userphoto: null,
+                userphoto: '',
                 surnname: '',
                 othername: '',
                 dob: '',
@@ -131,6 +132,7 @@ export default {
                 weight: '',
                 eyes: '',
                 licensclasss: '',
+                hiddenid: '1'
             }
         };
     },
@@ -145,9 +147,10 @@ export default {
     },
     async savelicense() {
         try {
-            await this.$inertia.post('/storeuser', this.licensedetails);
+            await this.$inertia.post('/savedrivinglisence', this.licensedetails);
+
             this.licensedetails = {
-                userphoto: null,
+                userphoto: '',
                 surnname: '',
                 othername: '',
                 dob: '',
