@@ -30,19 +30,28 @@ import axios from 'axios';
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>Role</th>
+                          <th>Name</th>
+                          <th>NIC</th>
+                          <th>License No</th>
+                          <th>Date Of Issue</th>
+                          <th>Classes</th>
                           <th class="disabled-sorting text-right">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td></td>
-                          <td></td>
+                        <tr  v-for="license in licenses" :key="license.id">
+                          <td>{{ license.id }}</td>
+                          <td>{{ license.surname }}  {{ license.othername }}</td>
+                          <td>{{ license.nic }}</td>
+                          <td>{{ license.license_no }}</td>
+                          <td>{{ license.date_of_issue }}</td>
+                          <td>{{ license.classes }}</td>
                           <td class="text-right">
-                            <button class="icon-button btn btn-success btn-sm mr-1" @click="editRole()" title="Edit">
+
+                            <Link  class="icon-button btn btn-success btn-sm mr-1" title="Edit">
                               <i class="material-icons">edit</i>
-                            </button>
-                            <form @submit.prevent="deleteRole()" style="display: inline;">
+                            </Link>
+                            <form @submit.prevent="deletelicense(license.id)" style="display: inline;">
                               <button type="submit" class="icon-button btn btn-danger btn-sm mr-1" title="Delete">
                                 <i class="material-icons">delete</i>
                               </button>
@@ -62,35 +71,13 @@ import axios from 'axios';
 
 <script>
 export default {
-    props: {
-      
-    },
-    data() {
-        return {
-            roletask: {
-                rolename: '',
-                hiddenid: 1,
-                recordID: ''
-            }
-        };
+  props: {
+        licenses: Array
     },
     methods: {
-        async saveroles() {
-          try {
-                await this.$inertia.post('/insertrole', this.roletask);
-                this.roletask.rolename = '';
-            } catch (error) {
-                console.error('Error saving role:', error);
-            }
-        },
-        editRole(role) {
-          this.roletask.rolename = role.name;
-          this.roletask.recordID = role.id;
-          this.roletask.hiddenid = 2;
-    },
-      async deleteRole(roleId) {
+      async deletelicense(licenseId) {
         try {
-          await this.$inertia.delete(`/roledelete/${roleId}`);
+          await this.$inertia.get(`/drivinglisence/${licenseId}/3`);
         } catch (error) {
           console.error('Error deleting role:', error);
         }

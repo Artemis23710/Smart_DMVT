@@ -17,7 +17,7 @@ import axios from 'axios';
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form @submit.prevent="savelicense">
+                        <form @submit.prevent="savelicense" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row">
@@ -147,7 +147,15 @@ export default {
     },
     async savelicense() {
         try {
-            await this.$inertia.post('/savedrivinglisence', this.licensedetails);
+            const formData = new FormData();
+                for (const key in this.licensedetails) {
+                    formData.append(key, this.licensedetails[key]);
+                }
+                await this.$inertia.post('/savedrivinglisence', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
 
             this.licensedetails = {
                 userphoto: '',

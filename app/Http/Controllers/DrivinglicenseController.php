@@ -12,7 +12,10 @@ class DrivinglicenseController extends Controller
 {
     public function index()
     {
-        return Inertia::render('DrivingLicense/drivinglicense');
+        $licenses = DrivingLicenses::where('status', 1)
+        ->select('id', 'surname', 'othername', 'date_of_issue', 'nic','license_no','classes')
+        ->get();
+        return Inertia::render('DrivingLicense/drivinglicense',[ 'licenses' => $licenses ]);
     }
 
     public function newlicense(){
@@ -42,10 +45,13 @@ class DrivinglicenseController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }else{
 
+                $data = $request->except('userphoto'); 
+
                 if ($request->hasFile('userphoto')) {
                     $file = $request->file('userphoto');
                     $fileName = now()->year . '-' . $request->nic . '.' . $file->getClientOriginalExtension();
-                    $officerPhotoPath = $file->storeAs('Licensephoto', $fileName, 'Licensephoto');
+                    $filePath = $file->storeAs('Licensephoto', $fileName, 'Licensephoto');
+                    $data['photourl'] = $filePath;
                 }
 
                 DrivingLicenses::create([
@@ -70,10 +76,25 @@ class DrivinglicenseController extends Controller
 
                 $message = 'License successfully created.';
             }
-            return redirect()->back()->with('message', $message);
+            return redirect()->route('drivinglisencelist')->with('message', $message);
+
         }
         
 
+    }
+
+    public function status($requestid, $statusid)
+    {
+        $user = Auth::user();
+
+            $user = DrivingLicenses::findOrFail($requestid);
+            $user->status = $statusid;
+            $user->updated_by = Auth::id();
+            $user->save();
+
+            $message = 'Driving License Deleted Succssfully.';
+
+        return redirect()->back()->with('message', $message);
     }
 
 }
