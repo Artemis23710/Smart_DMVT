@@ -59,6 +59,7 @@ Route::get('/drivinglisencelist', [DrivinglicenseController::class, 'index'])->n
 Route::get('/drivinglisencenew', [DrivinglicenseController::class, 'newlicense'])->name('drivinglisencenew');
 Route::post('/savedrivinglisence', [DrivinglicenseController::class, 'store'])->name('savedrivinglisence');
 Route::get('/drivinglisence/{id}/{status}', [DrivinglicenseController::class, 'status'])->name('drivinglisence');
+Route::get('/drivinglisenceedit/{id}', [DrivinglicenseController::class, 'edit'])->name('drivinglisenceedit');
 
 
 Route::get('/drivinglisenceprint', [DrivinglicenseprintController::class, 'index'])->name('drivinglisenceprint');

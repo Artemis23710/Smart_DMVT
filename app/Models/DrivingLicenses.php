@@ -22,7 +22,7 @@ class DrivingLicenses extends Model
         'weight',
         'eyes',
         'classes',
-        'photourl',
+        'userphoto',
         'status',
         'created_by',
         'updated_by'

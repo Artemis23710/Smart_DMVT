@@ -27,7 +27,7 @@ class DrivinglicenseController extends Controller
         if ($request->hiddenid == 1) {
             $validator = Validator::make($request->all(), [
                 'userphoto' => 'required',
-                'surnname' => 'required|string',
+                'surname' => 'required|string',
                 'othername' => 'required|string',
                 'dob' => 'required',
                 'doi' => 'required',
@@ -51,11 +51,11 @@ class DrivinglicenseController extends Controller
                     $file = $request->file('userphoto');
                     $fileName = now()->year . '-' . $request->nic . '.' . $file->getClientOriginalExtension();
                     $filePath = $file->storeAs('Licensephoto', $fileName, 'Licensephoto');
-                    $data['photourl'] = $filePath;
+                    $data['userphoto'] = $filePath;
                 }
 
                 DrivingLicenses::create([
-                    'surname' => $request->input('surnname'),
+                    'surname' => $request->input('surname'),
                     'othername' => $request->input('othername'),
                     'date_of_birth' => $request->input('dob'),
                     'date_of_issue' => $request->input('doi'),
@@ -68,7 +68,7 @@ class DrivinglicenseController extends Controller
                     'weight' => $request->input('weight'),
                     'eyes' => $request->input('eyes'),
                     'classes' => $request->input('licensclasss'),
-                    'photourl' => $fileName,
+                    'userphoto' => $fileName,
                     'status' => 1,
                     'created_by' => Auth::id(),
                     'updated_by' => 0
@@ -76,10 +76,64 @@ class DrivinglicenseController extends Controller
 
                 $message = 'License successfully created.';
             }
-            return redirect()->route('drivinglisencelist')->with('message', $message);
+           
 
+        }else{
+
+            $validator = Validator::make($request->all(), [
+                'userphoto' => 'required',
+                'surname' => 'required|string',
+                'othername' => 'required|string',
+                'dob' => 'required',
+                'doi' => 'required',
+                'doe' => 'required|string',
+                'nic' => 'required|string',
+                'liceno' => 'required',
+                'address' => 'required',
+                'sex' => 'required|string',
+                'height' => 'required|string',
+                'weight' => 'required',
+                'eyes' => 'required|string',
+                'licensclasss' => 'required|string'
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }else{
+
+                $data = $request->except('userphoto'); 
+
+                $license = DrivingLicenses::findOrFail($request->input('recordID'));
+                $license->surname = $request->input('surname');
+                $license->othername = $request->input('othername');
+                $license->date_of_birth = $request->input('dob');
+                $license->date_of_issue = $request->input('doi');
+                $license->date_of_expire = $request->input('doe');
+                $license->nic = $request->input('nic');
+                $license->license_no = $request->input('liceno');
+                $license->address = $request->input('address');
+                $license->sex = $request->input('sex');
+                $license->height = $request->input('height');
+                $license->weight = $request->input('weight');
+                $license->eyes = $request->input('eyes');
+                $license->classes = $request->input('licensclasss');
+    
+                if ($request->hasFile('userphoto')) {
+                    $file = $request->file('userphoto');
+                    $fileName = now()->year . '-' . $request->nic . '.' . $file->getClientOriginalExtension();
+                    $filePath = $file->storeAs('Licensephoto', $fileName, 'Licensephoto');
+                    $data['userphoto'] = $fileName; 
+                } else {
+                    $data['userphoto'] = $license->userphoto;
+                }
+
+                $license->fill($data);
+                $license->updated_by = Auth::id(); 
+                $license->save();
+                $message = 'License successfully Updated.';
+            }
         }
-        
+
+        return redirect()->route('drivinglisencelist')->with('message', $message);
 
     }
 
@@ -96,5 +150,18 @@ class DrivinglicenseController extends Controller
 
         return redirect()->back()->with('message', $message);
     }
+
+    public function edit($requestid)
+    {
+        $license = DrivingLicenses::where('status', 1)
+            ->where('id', $requestid)
+            ->select('id as recordID', 'surname', 'othername', 'date_of_birth as dob', 'date_of_issue as doi', 'date_of_expire as doe', 'nic', 'license_no as liceno','address', 'sex', 'height', 'weight', 'eyes', 'classes as licensclasss', 'userphoto')
+            ->first(); 
+    
+        return Inertia::render('DrivingLicense/editlicense', [
+            'license' => $license
+        ]);
+    }
+    
 
 }

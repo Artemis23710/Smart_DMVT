@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('weight');
             $table->string('eyes');
             $table->string('classes');
-            $table->string('photourl');
+            $table->string('userphoto');
             $table->integer('status'); 
             $table->integer('created_by')->nullable();  
             $table->integer('updated_by')->nullable(); 

@@ -48,9 +48,10 @@ import axios from 'axios';
                           <td>{{ license.classes }}</td>
                           <td class="text-right">
 
-                            <Link  class="icon-button btn btn-success btn-sm mr-1" title="Edit">
+                            <Link :href="route('drivinglisenceedit', { id: license.id })" class="icon-button btn btn-success btn-sm mr-1" title="Edit">
                               <i class="material-icons">edit</i>
                             </Link>
+
                             <form @submit.prevent="deletelicense(license.id)" style="display: inline;">
                               <button type="submit" class="icon-button btn btn-danger btn-sm mr-1" title="Delete">
                                 <i class="material-icons">delete</i>

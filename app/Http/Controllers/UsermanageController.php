@@ -125,6 +125,4 @@ class UsermanageController extends Controller
         return redirect()->back()->with('message', $message);
     }
 
-
-
 }
