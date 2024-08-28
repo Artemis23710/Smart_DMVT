@@ -15,11 +15,11 @@ class DrivinglicenseController extends Controller
         $licenses = DrivingLicenses::where('status', 1)
         ->select('id', 'surname', 'othername', 'date_of_issue', 'nic','license_no','classes')
         ->get();
-        return Inertia::render('DrivingLicense/drivinglicense',[ 'licenses' => $licenses ]);
+        return Inertia::render('DrivingLicense/DrivingLicensenew/drivinglicense',[ 'licenses' => $licenses ]);
     }
 
     public function newlicense(){
-        return Inertia::render('DrivingLicense/newlicense');
+        return Inertia::render('DrivingLicense/DrivingLicensenew/newlicense');
     }
 
     public function store(Request $request){
@@ -158,7 +158,7 @@ class DrivinglicenseController extends Controller
             ->select('id as recordID', 'surname', 'othername', 'date_of_birth as dob', 'date_of_issue as doi', 'date_of_expire as doe', 'nic', 'license_no as liceno','address', 'sex', 'height', 'weight', 'eyes', 'classes as licensclasss', 'userphoto')
             ->first(); 
     
-        return Inertia::render('DrivingLicense/editlicense', [
+        return Inertia::render('DrivingLicense/DrivingLicensenew/editlicense', [
             'license' => $license
         ]);
     }

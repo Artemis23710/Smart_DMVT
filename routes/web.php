@@ -63,6 +63,7 @@ Route::get('/drivinglisenceedit/{id}', [DrivinglicenseController::class, 'edit']
 
 
 Route::get('/drivinglisenceprint', [DrivinglicenseprintController::class, 'index'])->name('drivinglisenceprint');
+Route::get('/drivinglisenceprintprintview/{id}', [DrivinglicenseprintController::class, 'printview'])->name('drivinglisenceprintprintview');
 
 Route::get('/drivinglisencerenew', [DrivinglicenserenewController::class, 'index'])->name('drivinglisencerenew');
 

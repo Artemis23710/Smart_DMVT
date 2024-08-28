@@ -9,6 +9,6 @@ class DrivinglicenserenewController extends Controller
 {
     public function index()
     {
-        return Inertia::render('DrivingLicense/drivinglicenserenew');
+        return Inertia::render('DrivingLicense/LicenseRenew/drivinglicenserenew');
     }
 }
