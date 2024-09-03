@@ -13,48 +13,71 @@ import axios from 'axios';
 
 <template>
     <AuthenticatedLayout>
-
-        <div class="license-container">
+        <div  ref="licenseContainer" class="license-container">
             <div class="license-header">
-                <h1 style=" font-size:34px;">DRIVER LICENSE</h1>
+                <h1 style="font-size:34px;">DRIVER LICENSE</h1>
                 <hr style="border:none; height:5px; background-color: #0063a0;">
             </div>
             <br>
             <div class="license-body">
                 <div class="license-photo">
-                    <img src="../../../../../public/Images/avatar.jpg" id="officerimg" name="officerimg"/>
+                    <img :src="license.userphoto ? `/storage//Photos/Licensephoto/${license.userphoto}` : '../../../../../public/Images/avatar.jpg'"
+                        alt="User Photo" id="officerimg" />
                 </div>
                 <div class="license-info">
                     <div class="license-details">
-                    <p><strong class="license-detailstitle">DL</strong> <strong class="license-detail-record">123456789</strong></p>
-                    <p style="margin-right:40px;"><strong class="license-detailstitle">CLASS</strong> <strong class="license-detail-record">C</strong></p>
-                </div>
-                    <p><strong class="license-detailstitle">EXP</strong> <strong class="license-detail-record">07/11/2025</strong></p>
-                    <p><strong class="license-detailstitle">LN</strong> <strong class="license-detail-record">DOE</strong></p>
-                    <p><strong class="license-detailstitle">FN</strong> <strong class="license-detail-record">JOHN</strong></p>
-                    <p class="addresstitle">0123 Anystreet,<br> Anytown, CA 012345</p>
-                    <p><strong class="license-detailstitle">DOB</strong> <strong class="license-detail-record">09/05/1993</strong></p>
+                        <p><strong class="license-detailstitle">DL</strong> <strong
+                                class="license-detail-record">{{ license.liceno }}</strong></p>
+                        <p style="margin-right:40px;"><strong class="license-detailstitle">CLASS</strong> <strong
+                                class="license-detail-record">{{ license.licensclasss }}</strong></p>
+                    </div>
+                    <p><strong class="license-detailstitle">EXP</strong> <strong
+                            class="license-detail-record">{{ formatDate(license.doe) }}</strong></p>
+                    <p><strong class="license-detailstitle">LN</strong> <strong
+                            class="license-detail-record">{{ license.surname }}</strong></p>
+                    <p><strong class="license-detailstitle">FN</strong> <strong
+                            class="license-detail-record">{{ license.othername }}</strong></p>
+                    <p class="addresstitle">{{ license.address }}</p>
+                    <p><strong class="license-detailstitle">DOB</strong> <strong
+                            class="license-detail-record">{{ formatDate(license.dob) }}</strong></p>
                 </div>
             </div>
             <div class="license-footer">
-                <p><strong class="license-footertitle">SEX</strong><strong class="license-footer-record">M </strong> 
-                    <strong class="license-footertitle">HAIR</strong><strong class="license-footer-record">BRN </strong>
-                    <strong class="license-footertitle">EYES</strong><strong class="license-footer-record">BLUE</strong> </p>
-                <p><strong class="license-footertitle">HGT</strong> <strong class="license-footer-record">6'0" </strong>
-                    <strong class="license-footertitle">WGT</strong><strong class="license-footer-record">183 lb</strong>
-                    <strong class="license-footertitle">ISS</strong><strong class="license-footer-record"> 07/11/2015</strong>
+                <p><strong class="license-footertitle">SEX</strong> <strong
+                        class="license-footer-record">{{ license.sex }}</strong>
+                    <strong class="license-footertitle">HAIR</strong><strong class="license-footer-record">N/A</strong>
+                    <strong class="license-footertitle">EYES</strong> <strong
+                        class="license-footer-record">{{ license.eyes }}</strong></p>
+                <p><strong class="license-footertitle">HGT</strong> <strong
+                        class="license-footer-record">{{ license.height }}</strong>
+                    <strong class="license-footertitle">WGT</strong><strong
+                        class="license-footer-record">{{ license.weight }}</strong>
+                    <strong class="license-footertitle">ISS</strong> <strong
+                        class="license-footer-record">{{ formatDate(license.doi) }}</strong>
                 </p>
             </div>
         </div>
+        <br>
+        <br>
+        <div class="row justify-content-center"> 
+            <div class="col-4">
+                <div class="card text-center"> 
+                    <div class="card-body">
+                        <button @click="downloadPDF" class="btn btn-danger">
+                            <i class="material-icons">picture_as_pdf</i> Download PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+     
     </AuthenticatedLayout>
 </template>
 
-<script>
-</script>
-<style>
+<style scoped>
         .license-container {
-            width: 900px;
+            width: 850px;
             border-radius: 10px;
             background-color: #c6e7f1;
             padding: 20px;
@@ -143,3 +166,45 @@ import axios from 'axios';
 
 
 </style>
+
+<script>
+   import html2pdf from 'html2pdf.js';
+   export default {
+       props: {
+           license: Object,
+       },
+       methods: {
+           formatDate(date) {
+               const options = {
+                   year: 'numeric',
+                   month: '2-digit',
+                   day: '2-digit'
+               };
+               return new Date(date).toLocaleDateString(undefined, options);
+           },
+           downloadPDF() {
+               const element = this.$refs.licenseContainer;
+
+               const opt = {
+                   margin: 1,
+                   filename: `License_${this.license.liceno}.pdf`,
+                   image: {
+                       type: 'jpeg',
+                       quality: 0.98
+                   },
+                   html2canvas: {
+                       scale: 2
+                   },
+                   jsPDF: {
+                       unit: 'in',
+                       format: 'letter',
+                       orientation: 'landscape'
+                   } // Change orientation to landscape
+               };
+
+               html2pdf().from(element).set(opt).save();
+           }
+
+       }
+    };
+</script>

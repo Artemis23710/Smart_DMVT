@@ -23,7 +23,8 @@ class DrivinglicenseprintController extends Controller
     {
         $license = DrivingLicenses::where('status', 1)
             ->where('id', $requestid)
-            ->select('id as recordID', 'surname', 'othername', 'date_of_birth as dob', 'date_of_issue as doi', 'date_of_expire as doe', 'nic', 'license_no as liceno','address', 'sex', 'height', 'weight', 'eyes', 'classes as licensclasss', 'userphoto')
+            ->select('id as recordID', 'surname', 'othername', 'date_of_birth as dob', 'date_of_issue as doi', 'date_of_expire as doe', 'nic', 'license_no as liceno','address',
+             'sex', 'height', 'weight', 'eyes', 'classes as licensclasss', 'userphoto')
             ->first(); 
     
         return Inertia::render('DrivingLicense/LicensePrint/licenseprintpdf', [
