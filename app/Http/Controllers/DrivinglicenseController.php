@@ -163,5 +163,4 @@ class DrivinglicenseController extends Controller
         ]);
     }
     
-
 }

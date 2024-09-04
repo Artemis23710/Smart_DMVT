@@ -66,5 +66,7 @@ Route::get('/drivinglisenceprint', [DrivinglicenseprintController::class, 'index
 Route::get('/drivinglisenceprintprintview/{id}', [DrivinglicenseprintController::class, 'printview'])->name('drivinglisenceprintprintview');
 
 Route::get('/drivinglisencerenew', [DrivinglicenserenewController::class, 'index'])->name('drivinglisencerenew');
+Route::get('/lisencerenew/{id}', [DrivinglicenserenewController::class, 'renew'])->name('lisencerenew');
+Route::post('/savelisencerenew', [DrivinglicenserenewController::class, 'updatelicense'])->name('savelisencerenew');
 
 require __DIR__.'/auth.php';
