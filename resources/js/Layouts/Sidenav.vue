@@ -26,7 +26,7 @@
                     <a class="nav-link" href="#"><i class="material-icons">build</i>Vehicle Registration</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <Link class="dropdown-item" href="#">New Vehicle Registration</Link>
+                            <Link class="dropdown-item" :href="route('vehicalregistrationlist')">New Vehicle Registration</Link>
                         </li>
                         <li>
                             <Link class="dropdown-item" href="#">Vehicle Registration Renew</Link>
@@ -38,20 +38,6 @@
                     <Link class="nav-link" href="#"><i class="material-icons">view_module</i> Component</Link>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#"><i class="material-icons">apps</i> Applications</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <Link class="dropdown-item" href="#">Action</Link>
-                        </li>
-                        <li>
-                            <Link class="dropdown-item" href="#">Another action</Link>
-                        </li>
-                        <li>
-                            <Link class="dropdown-item" href="#">Something else here</Link>
-                        </li>
-                    </ul>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#"><i class="material-icons">admin_panel_settings</i> Administrator</a>
                     <ul class="dropdown-menu">

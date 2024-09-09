@@ -6,7 +6,7 @@ use App\Http\Controllers\DrivinglicenseprintController;
 use App\Http\Controllers\DrivinglicenserenewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolemanageController;
-use App\Http\Controllers\UsermanageController;
+use App\Http\Controllers\VehicalRegistrationController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -53,8 +53,6 @@ Route::get('/permisionlist', [Admincontroller::class, 'index'])->name('permision
 Route::get('/addpermision/{id}', [Admincontroller::class, 'addprivilegesview'])->name('addpermision');
 Route::post('/saveprivilegies', [Admincontroller::class, 'updateprivilegies'])->name('saveprivilegies');
 
-
-
 Route::get('/drivinglisencelist', [DrivinglicenseController::class, 'index'])->name('drivinglisencelist');
 Route::get('/drivinglisencenew', [DrivinglicenseController::class, 'newlicense'])->name('drivinglisencenew');
 Route::post('/savedrivinglisence', [DrivinglicenseController::class, 'store'])->name('savedrivinglisence');
@@ -68,5 +66,11 @@ Route::get('/drivinglisenceprintprintview/{id}', [DrivinglicenseprintController:
 Route::get('/drivinglisencerenew', [DrivinglicenserenewController::class, 'index'])->name('drivinglisencerenew');
 Route::get('/lisencerenew/{id}', [DrivinglicenserenewController::class, 'renew'])->name('lisencerenew');
 Route::post('/savelisencerenew', [DrivinglicenserenewController::class, 'updatelicense'])->name('savelisencerenew');
+
+
+Route::get('/vehicalregistrationlist', [VehicalRegistrationController::class, 'index'])->name('vehicalregistrationlist');
+Route::get('/vehicalregistrationnew', [VehicalRegistrationController::class, 'newvehicalregistration'])->name('vehicalregistrationnew');
+
+
 
 require __DIR__.'/auth.php';
