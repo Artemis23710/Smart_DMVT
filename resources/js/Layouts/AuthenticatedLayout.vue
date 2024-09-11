@@ -29,8 +29,8 @@ const showingNavigationDropdown = ref(false);
 
                         <img src="../../../public/Images/logo2.png" alt="Logo" class="search-logo">
                         <div class="search-bar">
-                            <input type="text" id="search-field" class="search-input" placeholder="Search A Vehicle by Registration Number...">
-                            <button id="search-button" class="search-btn">
+                            <input type="text"  v-model="searchQuery"  class="search-input" placeholder="Search A Vehicle by Registration Number...">
+                            <button id="search-button" @click="searchVehicle" class="search-btn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zm-5.44 1.528a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/>
                                 </svg>
@@ -40,21 +40,35 @@ const showingNavigationDropdown = ref(false);
                 
                     <br><br>
                     <div id="results-container" >
-                        <div class="material-datatables" style="display: none;">
+                        <div class="material-datatables">
                             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%" >
                                 <thead>
                                     <tr>
-                                      <th>Officer Name</th>
-                                      <th>Officer ID</th>
-                                      <th>Gender</th>
-                                      <th>Rank</th>
-                                      <th>Division</th>
-                                      <th>Assigned Station</th>
-                                      <th>Contact</th>
-                                      <th class="disabled-sorting text-right">Actions</th>
+                                        <th>ID</th>
+                                        <th>Class of Vehicle</th>
+                                        <th>Registration No</th>
+                                        <th>Date Of Registration</th>
+                                        <th>Color</th>
+                                        <th>Make</th>
+                                        <th>Owners Name</th>
+                                        <th>Owner's Address</th>
+                                        <th class="disabled-sorting text-right">Actions</th>
                                     </tr>
                                   </thead>
                                   <tbody id="results-body">
+
+                                    <tr v-for="vehicle in searchResults" :key="vehicle.id">
+                                        <td>{{ vehicle.id }}</td>
+                                        <td>{{ vehicle.classofvehicle }}</td>
+                                        <td>{{ vehicle.registration_No }}</td>
+                                        <td>{{ vehicle.register_date }}</td>
+                                        <td>{{ vehicle.color }}</td>
+                                        <td>{{ vehicle.make }}</td>
+                                        <td>{{ vehicle.ownername }}</td>
+                                        <td>{{ vehicle.owneraddress }}</td>
+                                        <td class="text-right">
+                                        </td>
+                                     </tr>
                                   </tbody>
                             </table>
                         </div>
@@ -67,7 +81,48 @@ const showingNavigationDropdown = ref(false);
         </div>
     </div>
 </template>
+<script>
+export default {
+    props: {
+        vehicles: {
+            type: Array,
+            required: true,
+        }
+    },
+    data() {
+        return {
+            searchQuery: '',
+            searchResults: this.vehicles
+        };
+    },
+    methods: {
+        async searchVehicle() {
+    try {
+        const formData = new FormData();
+        formData.append('registration_no', this.searchQuery);
 
+        const response = await this.$inertia.post('/vehiclesearch', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        console.log(response);
+        this.searchResults = response.props.vehicles;
+
+    } catch (error) {
+        console.error('Error searching for vehicle:', error);
+    }
+}
+
+    },
+    watch: {
+        vehicles(newVehicles) {
+            this.searchResults = newVehicles; 
+        }
+    }
+    
+};
+</script>
 
 <style scoped>
 main {

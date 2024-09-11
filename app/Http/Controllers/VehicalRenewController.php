@@ -93,5 +93,24 @@ class VehicalRenewController extends Controller
             } 
     }
 
+    public function searchVehicle(Request $request)
+    {
+        $registrationNo = $request->input('registration_no');
+
+        $vehicles = Vehicle_details::
+        where('registration_No', 'LIKE', '%' . $registrationNo . '%')
+        ->get();
+
+        if ($vehicles->isNotEmpty()) {
+
+            return Inertia::render('Layouts/AuthenticatedLayout', [
+                'vehicles' => $vehicles
+            ]);
+        } else {
+            return Inertia::render('Layouts/AuthenticatedLayout', [
+                'vehicle' => null
+            ]);
+        }
+    }
 
 }
