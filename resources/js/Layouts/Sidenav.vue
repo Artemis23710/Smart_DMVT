@@ -29,7 +29,7 @@
                             <Link class="dropdown-item" :href="route('vehicalregistrationlist')">New Vehicle Registration</Link>
                         </li>
                         <li>
-                            <Link class="dropdown-item" href="#">Vehicle Registration Renew</Link>
+                            <Link class="dropdown-item" :href="route('vehicalrenewlist')">Vehicle Registration Renew</Link>
                         </li>
                     </ul>
                 </li>

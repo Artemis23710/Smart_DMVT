@@ -7,6 +7,7 @@ use App\Http\Controllers\DrivinglicenserenewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolemanageController;
 use App\Http\Controllers\VehicalRegistrationController;
+use App\Http\Controllers\VehicalRenewController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -74,5 +75,9 @@ Route::post('/savevehicalregistration', [VehicalRegistrationController::class, '
 Route::get('/vehicledelete/{id}/{status}', [VehicalRegistrationController::class, 'status'])->name('vehicledelete');
 Route::get('/vehicleedit/{id}', [VehicalRegistrationController::class, 'edit'])->name('vehicleedit');
 
+
+Route::get('/vehicalrenewlist', [VehicalRenewController::class, 'index'])->name('vehicalrenewlist');
+Route::get('/vehiclerenew/{id}', [VehicalRenewController::class, 'renew'])->name('vehiclerenew');
+Route::post('/savevehicalrenew', [VehicalRenewController::class, 'store'])->name('savevehicalrenew');
 
 require __DIR__.'/auth.php';
