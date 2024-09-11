@@ -127,6 +127,8 @@ import axios from 'axios';
                                     <br>
                                     <div class="col-12 d-flex align-items-center justify-content-center">
                                         <input type="hidden" v-model="vehicle.hiddenid"/>
+                                        <input type="hidden" v-model="vehicle.recordID"/>
+                                        <input type="hidden" v-model="vehicle.ownerid"/>
                                         <PrimaryButton type="submit">
                                             <i class="fas fa-save"></i>&nbsp; Save
                                         </PrimaryButton>
@@ -144,9 +146,20 @@ import axios from 'axios';
 <script>
 
 export default {
+    props: {
+        vehicledetails: {
+            type: Object,
+            required: true,
+        },
+        vehicleowner: {
+            type: Object,
+            required: true,
+        }
+    },
+
     data() {
         return {
-            vehicle:{
+            vehicle: Object.assign({
                 classofvehicle: '',
                 registrationno: '',
                 Chassisno: '',
@@ -162,10 +175,13 @@ export default {
                 ownername: '',
                 ownernic: '',
                 owneraddress: '',
-                hiddenid: '1'
-            }
+                hiddenid: '2',
+                recordID: '',
+                ownerid: this.vehicleowner.ownerID || '',
+            }, this.vehicledetails)
         };
     },
+
     methods: {
     async savelicense() {
         try {

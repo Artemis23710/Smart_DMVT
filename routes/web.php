@@ -70,7 +70,9 @@ Route::post('/savelisencerenew', [DrivinglicenserenewController::class, 'updatel
 
 Route::get('/vehicalregistrationlist', [VehicalRegistrationController::class, 'index'])->name('vehicalregistrationlist');
 Route::get('/vehicalregistrationnew', [VehicalRegistrationController::class, 'newvehicalregistration'])->name('vehicalregistrationnew');
-
+Route::post('/savevehicalregistration', [VehicalRegistrationController::class, 'store'])->name('savevehicalregistration');
+Route::get('/vehicledelete/{id}/{status}', [VehicalRegistrationController::class, 'status'])->name('vehicledelete');
+Route::get('/vehicleedit/{id}', [VehicalRegistrationController::class, 'edit'])->name('vehicleedit');
 
 
 require __DIR__.'/auth.php';
