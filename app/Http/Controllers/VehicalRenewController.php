@@ -103,14 +103,47 @@ class VehicalRenewController extends Controller
 
         if ($vehicles->isNotEmpty()) {
 
-            return Inertia::render('Layouts/AuthenticatedLayout', [
+            return Inertia::render('Dashboard', [
                 'vehicles' => $vehicles
             ]);
         } else {
-            return Inertia::render('Layouts/AuthenticatedLayout', [
+            return Inertia::render('Dashboard', [
                 'vehicle' => null
             ]);
         }
+    }
+
+    public function Viewvehicle($requestid)
+    {
+        $vehicle = Vehicle_details::where('status', 1)
+            ->where('id', $requestid)
+            ->select('id as recordID', 'classofvehicle', 'registration_No as registrationno',
+             'Chassisno', 'register_date as registerdate', 'condition', 'engineno', 
+             'capacity','fueltype', 'make', 'origincountry', 'manufactureyear', 'color',
+              'ownername', 'ownernic','owneraddress')
+            ->first(); 
+
+        $vehicleowner = Vehicle_owners_details::where('vehicle_ID', $requestid)
+        ->where(function($query) {
+            $query->whereNull('date_of_transfer')
+                  ->orWhere('date_of_transfer', '');
+            })
+           ->select('id as ownerID')
+          ->first(); 
+
+          $oldvehicleowner = Vehicle_owners_details::where('vehicle_ID', $requestid)
+          ->where(function($query) {
+              $query->whereNotNull('date_of_transfer');
+          })
+          ->select('*')
+          ->get();
+      
+          
+        return Inertia::render('Vehicleregistration/VehicalRenew/viewvehicalrenew', [
+            'vehicledetails' => $vehicle,
+            'vehicleowner' => $vehicleowner,
+            'oldvehicleowners' => $oldvehicleowner
+        ]);
     }
 
 }

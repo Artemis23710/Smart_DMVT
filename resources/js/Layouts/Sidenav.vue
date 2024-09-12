@@ -33,11 +33,6 @@
                         </li>
                     </ul>
                 </li>
-
-                <li class="nav-item">
-                    <Link class="nav-link" href="#"><i class="material-icons">view_module</i> Component</Link>
-                </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#"><i class="material-icons">admin_panel_settings</i> Administrator</a>
                     <ul class="dropdown-menu">

@@ -81,5 +81,6 @@ Route::get('/vehiclerenew/{id}', [VehicalRenewController::class, 'renew'])->name
 Route::post('/savevehicalrenew', [VehicalRenewController::class, 'store'])->name('savevehicalrenew');
 
 Route::post('/vehiclesearch', [VehicalRenewController::class, 'searchVehicle'])->name('vehiclesearch');
+Route::get('/vehicleViewvehicle/{id}', [VehicalRenewController::class, 'Viewvehicle'])->name('vehicleViewvehicle');
 
 require __DIR__.'/auth.php';
